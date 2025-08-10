@@ -22,8 +22,8 @@ export class FoodController {
   }
 
   @Get()
-  findAll(@Query('page') page?: number) {
-    return this.foodService.findAll({ page });
+  findAll(@Query('page') page?: number, @Query('name') name?: string) {
+    return this.foodService.findAll({ page, name });
   }
 
   @Get(':id')

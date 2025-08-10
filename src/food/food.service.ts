@@ -18,13 +18,14 @@ export class FoodService {
     });
   }
 
-  findAll({ page = 1 }: { page?: number }) {
+  findAll({ page = 1, name }: { page?: number; name?: string }) {
     const take = 10;
     const skip = (page - 1) * take;
     return this.prisma.food.findMany({
       skip,
       take,
       include: { restaurant: true }, // include related restaurant
+      where: name ? { name: { contains: name } } : undefined,
     });
   }
 
