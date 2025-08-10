@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, IsUrl, ValidateNested } from 'class-validator';
-import { CreateRestuarantDto } from './create-restuarant.dto';
+import { CreateRestaurantDto } from '../../restaurant/dto/create-restaurant.dto';
 import { Type } from 'class-transformer';
 
 export class CreateFoodDto {
@@ -11,6 +11,6 @@ export class CreateFoodDto {
   image: string;
 
   @ValidateNested()
-  @Type(() => CreateRestuarantDto)
-  restaurant: CreateRestuarantDto;
+  @Type(() => CreateRestaurantDto)
+  restaurant: CreateRestaurantDto;
 }

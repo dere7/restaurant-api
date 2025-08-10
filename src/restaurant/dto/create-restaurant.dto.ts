@@ -1,7 +1,7 @@
 import { RestaurantStatus } from '@prisma/client';
 import { IsNotEmpty, IsUrl, IsEnum } from 'class-validator';
 
-export class CreateRestuarantDto {
+export class CreateRestaurantDto {
   @IsNotEmpty()
   name: string;
   @IsUrl()
