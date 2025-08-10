@@ -1,4 +1,4 @@
-import { RestuarantStatus } from '@prisma/client';
+import { RestaurantStatus } from '@prisma/client';
 import { IsNotEmpty, IsUrl, IsEnum } from 'class-validator';
 
 export class CreateRestuarantDto {
@@ -6,6 +6,6 @@ export class CreateRestuarantDto {
   name: string;
   @IsUrl()
   logo: string;
-  @IsEnum(RestuarantStatus)
-  status: RestuarantStatus;
+  @IsEnum(RestaurantStatus)
+  status: RestaurantStatus;
 }

@@ -11,26 +11,49 @@ export class FoodService {
     return this.prisma.food.create({
       data: {
         ...food,
-        restuarant: {
+        restaurant: {
           create: restaurant,
         },
       },
     });
   }
 
-  findAll() {
-    return `This action returns all food`;
+  findAll({ page = 1 }: { page?: number }) {
+    const take = 10;
+    const skip = (page - 1) * take;
+    return this.prisma.food.findMany({
+      skip,
+      take,
+      include: { restaurant: true }, // include related restaurant
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} food`;
+    return this.prisma.food.findUnique({
+      where: { id },
+      include: { restaurant: true },
+    });
   }
 
   update(id: number, updateFoodDto: UpdateFoodDto) {
-    return `This action updates a #${id} food`;
+    const { restaurant, ...food } = updateFoodDto;
+    return this.prisma.food.update({
+      where: { id },
+      data: {
+        ...food,
+        ...(restaurant && {
+          restaurant: {
+            update: updateFoodDto.restaurant ?? {},
+          },
+        }),
+      },
+      include: { restaurant: true },
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} food`;
+    return this.prisma.food.delete({
+      where: { id },
+    });
   }
 }

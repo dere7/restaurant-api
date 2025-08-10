@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { FoodService } from './food.service';
 import { CreateFoodDto } from './dto/create-food.dto';
@@ -21,8 +22,8 @@ export class FoodController {
   }
 
   @Get()
-  findAll() {
-    return this.foodService.findAll();
+  findAll(@Query('page') page?: number) {
+    return this.foodService.findAll({ page });
   }
 
   @Get(':id')

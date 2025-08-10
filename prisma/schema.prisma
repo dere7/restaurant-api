@@ -13,26 +13,25 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 model Food {
-  id           Int        @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   name         String
   rating       Float
   image        String
-  restuarantId Int
-  restuarant   Restuarant @relation(fields: [restuarantId], references: [id])
+  restaurantId Int?
+  restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
 }
 
-model Restuarant {
+model Restaurant {
   id     Int              @id @default(autoincrement())
   name   String
   logo   String
-  status RestuarantStatus
+  status RestaurantStatus
 
   foods Food[]
 }
 
-enum RestuarantStatus {
+enum RestaurantStatus {
   OPEN_NOW
   CLOSED
 }
